@@ -13,6 +13,49 @@ TODO: You must provide 2 selects to filter the rows based in:
  1) consumer type
  2) consumption range
  - You must create the filter functionality in the front-end using JS
+ -no time for that
 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consumer List</title>
+</head>
+<body>
+    <h1>Lista de Consumidores</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Documento</th>
+                <th>Consumo (kWh)</th>
+                <th>Tarifa da Distribuidora</th>
+                <th>Regra de Desconto</th>
+                <th>Economia Mensal</th>
+                <th>Economia Anual</th>
+                <th>Valor do Desconto</th>
+                <th>Cobertura</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consumer, savings in zip(consumers, savings_data) %}
+            <tr>
+                <td>{{ consumer.name }}</td>
+                <td>{{ consumer.document }}</td>
+                <td>{{ consumer.consumption }}</td>
+                <td>{{ consumer.distributor_tax }}</td>
+                <td>{{ consumer.discount_rule.consumer_type }}</td>  <!-- Acesso aos dados da regra de desconto -->
+                <td>{{ savings['monthly_savings'] }}</td>  <!-- Acesso à economia mensal do dicionário -->
+                <td>{{ savings['annual_savings'] }}</td>  <!-- Acesso à economia anual do dicionário -->
+                <td>{{ savings['applied_discount'] }}</td>  <!-- Acesso ao valor do desconto do dicionário -->
+                <td>{{ savings['coverage'] }}</td>  <!-- Acesso à cobertura do dicionário -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+
 </body>
 </html>
